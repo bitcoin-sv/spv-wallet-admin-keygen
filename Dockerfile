@@ -32,8 +32,6 @@ ENV SECRET_NAME=bux-keys
 ENV XPUB_KEY_NAME=admin_xpub
 ENV XPRV_KEY_NAME=admin_xpriv
 
-#COPY --from=build src/xpub_key.txt .
-#COPY --from=build src/xprv_key.txt .
 COPY --from=build src/set_secret.sh .
 COPY --from=build /generator .
 
