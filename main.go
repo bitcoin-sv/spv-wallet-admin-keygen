@@ -20,7 +20,7 @@ func main() {
 	xpubKeyFile, err := os.Create(xpubKeyName)
 
 	if err != nil {
-		fmt.Println(err)
+		panic(err)
 	}
 
 	defer func(xpubKeyFile *os.File) {
@@ -33,7 +33,7 @@ func main() {
 	_, err = xpubKeyFile.WriteString(keys.XPub().String())
 
 	if err != nil {
-		fmt.Println(err)
+		panic(err)
 	}
 
 	fmt.Println("xpub_key.txt created and written successfully.")
@@ -41,7 +41,7 @@ func main() {
 	xprvKeyFile, err := os.Create(xprvKeyName)
 
 	if err != nil {
-		fmt.Println(err)
+		panic(err)
 	}
 
 	defer func(xprvKeyFile *os.File) {
@@ -54,10 +54,8 @@ func main() {
 	_, err = xprvKeyFile.WriteString(keys.XPriv())
 
 	if err != nil {
-		fmt.Println(err)
+		panic(err)
 	}
 
 	fmt.Println("xprv_key.txt created and written successfully.")
-
-	fmt.Println(keys.XPriv())
 }
