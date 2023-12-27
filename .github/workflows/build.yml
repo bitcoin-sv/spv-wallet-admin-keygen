@@ -77,4 +77,5 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
           short-description: ${{ github.event.repository.description }}
           repository: ${{ env.DOCKERHUB_OWNER }}/${{ env.DOCKERHUB_REPO }}
-          readme-filepath: ./release/artifacts/README.DOCKER.template.md
+#          readme-filepath: ./release/artifacts/README.DOCKER.template.md
+          readme-filepath: ./README.DOCKER.template.md
