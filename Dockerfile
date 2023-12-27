@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:1
 
 ARG GO_VERSION=1.21
-FROM --platform=$TARGETPLATFORM golang:${GO_VERSION} AS build
+FROM --platform=$BUILDPLATFORM golang:${GO_VERSION} AS build
 WORKDIR /src
 
 COPY . /src
@@ -13,7 +13,7 @@ RUN --mount=type=cache,target=/go/pkg/mod/ \
 
 RUN --mount=type=cache,target=/go/pkg/mod/ \
     --mount=type=bind,target=. \
-    CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -v -o /generator
+    CGO_ENABLED=0 go build -ldflags="-s -w" -v -o /generator
 
 FROM --platform=$TARGETPLATFORM bitnami/kubectl:latest AS final
 
