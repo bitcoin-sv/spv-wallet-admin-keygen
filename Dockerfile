@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:1
 
 ARG GO_VERSION=1.21
-FROM --platform=$BUILDPLATFORM golang:${GO_VERSION} AS build
+FROM --platform=$TARGETPLATFORM golang:${GO_VERSION} AS build
 WORKDIR /src
 
 COPY . /src
