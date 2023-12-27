@@ -15,7 +15,6 @@ RUN --mount=type=cache,target=/go/pkg/mod/ \
     --mount=type=bind,target=. \
     CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -v -o /generator
 
-
 FROM bitnami/kubectl:latest AS final
 
 WORKDIR /src
