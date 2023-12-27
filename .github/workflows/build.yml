@@ -60,9 +60,7 @@ jobs:
         with:
           context: .
           file: ./Dockerfile
-#          platforms: linux/amd64,linux/arm64,
-          platforms: linux/amd64,linux/arm64,darwin/amd64,darwin/arm64,windows/amd64
-          target: linux/amd64
+          platforms: linux/amd64
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
@@ -79,4 +77,4 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
           short-description: ${{ github.event.repository.description }}
           repository: ${{ env.DOCKERHUB_OWNER }}/${{ env.DOCKERHUB_REPO }}
-          readme-filepath: ./release/artifacts/README.DOCKER.md
+          readme-filepath: ./release/artifacts/README.DOCKER.template.md
