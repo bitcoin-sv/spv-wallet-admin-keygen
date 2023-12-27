@@ -11,6 +11,7 @@ _xpub_key.txt_: Contains the public key.
 
 _xprv_key.txt_: Contains the private key.
 
+
 Optionally, you can use the provided `set_secret.sh` script to create a Kubernetes secret with the generated keys:
 
 You can customize these by setting environment variables `SECRET_NAME`, `XPUB_KEY_NAME`, and `XPRV_KEY_NAME` before running the script.
