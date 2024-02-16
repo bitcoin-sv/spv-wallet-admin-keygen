@@ -1,4 +1,4 @@
-module BuxOrg/bux-admin-key-generator
+module github.com/bitcoin-sv/spv-wallet-admin-keygen
 
 go 1.21
 
