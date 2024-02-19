@@ -2,7 +2,7 @@
 
 ## Usage
 
-This tool is available as a Docker image to facilitate key generation and secret creation in a containerized environment.
+This tool generates public and private key pairs for SPV Wallet applications. The generated keys are stored in separate files (xpub_key.txt and xprv_key.txt).
 
 ### Build the Docker image
 
@@ -27,7 +27,7 @@ If you want to create a Kubernetes secret using the provided `set_secret.sh` scr
 
 The Docker image accepts the following environment variables:
 
-`SECRET_NAME`: (Default: _bsv-keys_) The name of the Kubernetes secret.
+`SECRET_NAME`: (Default: _spv-wallet-keys_) The name of the Kubernetes secret.
 
 `XPUB_KEY_NAME`: (Default: _admin_xpub_) The name of the key storing the public key.
 

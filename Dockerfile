@@ -19,7 +19,7 @@ FROM --platform=$TARGETPLATFORM bitnami/kubectl:latest AS final
 
 WORKDIR /src
 
-ENV SECRET_NAME=bsv-keys
+ENV SECRET_NAME=spv-wallet-keys
 ENV XPUB_KEY_NAME=admin_xpub
 ENV XPRV_KEY_NAME=admin_xpriv
 
