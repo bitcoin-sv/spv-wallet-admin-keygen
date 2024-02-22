@@ -1,7 +1,9 @@
-# Bux Key Generator
-This tool generates public and private key pairs for BuxOrg applications. The generated keys are stored in separate files (xpub_key.txt and xprv_key.txt).
+# SPV Wallet Admin Keygen
+
+This tool generates public and private key pairs for bitcoin-sv (SPV-Wallet) applications. The generated keys are stored in separate files (xpub_key.txt and xprv_key.txt).
 
 ## Usage
+
 `go run main.go`
 It will create two files:
 
@@ -13,5 +15,6 @@ Or
 
 `docker compose up -d`
 
-### License
+## License
+
 This project is licensed under the MIT License.
