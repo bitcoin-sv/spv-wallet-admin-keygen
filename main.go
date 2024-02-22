@@ -2,8 +2,9 @@ package main
 
 import (
 	"fmt"
-	"github.com/BuxOrg/go-buxclient/xpriv"
 	"os"
+
+	"github.com/bitcoin-sv/spv-wallet-go-client/xpriv"
 )
 
 func main() {

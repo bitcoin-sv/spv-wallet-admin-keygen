@@ -1,5 +1,5 @@
-github.com/BuxOrg/go-buxclient v0.4.0 h1:gn5cXjf+9u7ObRIP5/ELyIBvXfhFiLNEUVVI3pK2wNM=
-github.com/BuxOrg/go-buxclient v0.4.0/go.mod h1:OJerECkAm9XZX5srn/aCEs7E8o5eSd73zer7IR38WTQ=
+github.com/bitcoin-sv/spv-wallet-go-client v0.5.0 h1:KHfOv1YjpR3cAOmYaYTzI6eJbVpldfdxKc742aJeJlY=
+github.com/bitcoin-sv/spv-wallet-go-client v0.5.0/go.mod h1:AWfU/n+TTxdT013a7ENeqt6qzZnv2vQ/aeJi5Zr1BTw=
 github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/libsv/go-bk v0.1.6 h1:c9CiT5+64HRDbzxPl1v/oiFmbvWZTuUYqywCf+MBs/c=
