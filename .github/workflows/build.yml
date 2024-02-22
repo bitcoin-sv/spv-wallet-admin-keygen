@@ -16,17 +16,17 @@ jobs:
       - name: Setup Dockerhub repo based on var
         if: vars.DOCKERHUB_REPO != null
         run: |
-          echo "DOCKERHUB_REPO=${{vars.DOCKERHUB_REPO}}" >> $GITHUB_ENV
+          echo "DOCKERHUB_REPO=${{vars.DOCKER_REPO}}" >> $GITHUB_ENV
       - name: Default Dockerhub repo to on project name
         if: vars.DOCKERHUB_REPO == null
         run: |
           echo "DOCKERHUB_REPO=$(basename ${GITHUB_REPOSITORY})" >> $GITHUB_ENV
       - name: Setup Dockerhub owner based on var
-        if: vars.DOCKERHUB_OWNER != null
+        if: vars.DOCKER_ORG != null
         run: |
-          echo "DOCKERHUB_OWNER=${{vars.DOCKERHUB_OWNER}}" >> $GITHUB_ENV
+          echo "DOCKERHUB_OWNER=${{vars.DOCKER_ORG}}" >> $GITHUB_ENV
       - name: Default Dockerhub owner to dockerhub username
-        if: vars.DOCKERHUB_OWNER == null
+        if: vars.DOCKER_ORG == null
         run: |
           echo "DOCKERHUB_OWNER=${{secrets.DOCKERHUB_USERNAME}}" >> $GITHUB_ENV
 
@@ -41,8 +41,8 @@ jobs:
       - name: Login to Docker Hub
         uses: docker/login-action@v3
         with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Docker meta
         id: meta
@@ -73,8 +73,8 @@ jobs:
       - name: Docker Hub Description
         uses: peter-evans/dockerhub-description@v3
         with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
           short-description: ${{ github.event.repository.description }}
           repository: ${{ env.DOCKERHUB_OWNER }}/${{ env.DOCKERHUB_REPO }}
 #          readme-filepath: ./release/artifacts/README.DOCKER.template.md
