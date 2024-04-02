@@ -2,7 +2,9 @@
 
 This tool generates public and private key pairs for bitcoin-sv (SPV-Wallet) applications. The generated keys are stored in separate files (xpub_key.txt and xprv_key.txt).
 
-[SPV Wallet GitBook](https://bsvblockchain.gitbook.io/docs)
+## Documentation
+
+For in-depth information and guidance, please refer to the [SPV Wallet Documentation](https://bsvblockchain.gitbook.io/docs).
 ## Usage
 
 `go run main.go`
