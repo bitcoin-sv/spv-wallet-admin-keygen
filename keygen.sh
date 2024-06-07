@@ -16,7 +16,7 @@ function set_secret_key_if_not_exists() {
   key_name="${key_name}_KEY_NAME"
   local key="${!key_name}"
 
-  kubectl get secret "$SECRET_NAME" -o jsonpath='{.data}' | grep -q "$key"
+  kubectl get secret "$SECRET_NAME" -o jsonpath='{.data}' | grep -q "\"$key\""
   if [ $? -eq 1 ]; then
     value="$(base64 < "${type}_key.txt" | tr -d '\n')"
     kubectl patch secret "$SECRET_NAME" \
