@@ -16,6 +16,7 @@ jobs:
     uses: bactions/workflows/.github/workflows/release-go-server.yml@main
     with:
       version: ${{ github.ref_name }}
+      go_main_file: "main.go"
     secrets:
       DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
       DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
