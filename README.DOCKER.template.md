@@ -41,12 +41,12 @@ docker run -e SECRET_NAME=my-secret-name ${DOCKER_IMAGE}:latest
 
 ### Configure the key names
 By default the key names are `admin_xpub` and `admin_xpriv`.
-You can change it by using arguments -pb and -pv or --xpub and --xpriv respectively.
+You can change it by using arguments -pb and -pv or --xpub-key and --xprv-key respectively.
 
 ℹ️ To configure k8s connection look at the section [connect to kubernetes cluster](#connect-to-kubernetes-cluster)
 
 ```bash
-docker run ${DOCKER_IMAGE}:latest --xpub my-xpub-key-name --xpriv my-xpriv-key-name
+docker run ${DOCKER_IMAGE}:latest --xpub-key my-xpub-key-name --xprv-key my-xpriv-key-name
 ```
 
 If you prefer to use environment variables, you can set the `XPUB_KEY_NAME` and `XPRV_KEY_NAME` environment variables instead.
