@@ -1,36 +1,56 @@
 # SPV Wallet Admin Keygen
 
-## Usage
+This tool generates public and private key pairs for SPV Wallet applications. 
+It can just print those keys or by default store it in the Kubernetes secret.
 
-This tool generates public and private key pairs for SPV Wallet applications. The generated keys are stored in separate files (xpub_key.txt and xprv_key.txt).
+## Printing Keys
 
-### Build the Docker image
+To print the keys, run the following command:
 
-`docker build -t spv-wallet-admin-keygen` -
-Run the Docker container to generate keys:
+```bash
+docker run ${DOCKER_IMAGE}:latest --print --no-k8s
+```
 
-`docker run -v "$(pwd):/src" spv-wallet-admin-keygen` -
-Optionally, run the Docker container to create a Kubernetes secret:
+## Kubernetes Secret Creation
 
-`docker run -v "$(pwd):/src" -e SECRET_NAME=my-secret -e XPUB_KEY_NAME=my-xpub -e XPRV_KEY_NAME=my-xpriv spv-wallet-admin-keygen` -
-Replace _my-secret_, _my-xpub_, and _my-xpriv_ with your desired secret and key names.
+### connect to kubernetes cluster
+To set the keys in kubernetes secret, you need to setup the image to have access to the namespace kubernetes cluster.
 
-### Kubernetes Secret Creation
+You can do this for example by creating a dedicated kubeconfig file and mounting it to the container.
+Simplest way to do this is to mount your .kube/config file to the container.
 
-If you want to create a Kubernetes secret using the provided `set_secret.sh` script, make sure to set the required environment variables:
+```bash
+docker run -v {my/kube/config/file}:/kubeconfig -e KUBECONFIG=/kubeconfig ${DOCKER_IMAGE}:latest
+```
 
-`SECRET_NAME`: The name of the secret.
-`XPUB_KEY_NAME`: The name of the key storing the public key.
-`XPRV_KEY_NAME`: The name of the key storing the private key.
+### Configure the secret name
+By default the secret name is `spv-wallet-keys`.
+You can change it by using argument -s or --secret
 
-### Environment Variables
+ℹ️ To configure k8s connection look at the section [connect to kubernetes cluster](#connect-to-kubernetes-cluster)
 
-The Docker image accepts the following environment variables:
+```bash
+docker run ${DOCKER_IMAGE}:latest --secret my-secret-name
+```
 
-`SECRET_NAME`: (Default: _spv-wallet-keys_) The name of the Kubernetes secret.
+If you prefer to use environment variables, you can set the `SECRET_NAME` environment variable instead.
 
-`XPUB_KEY_NAME`: (Default: _admin_xpub_) The name of the key storing the public key.
+```bash
+docker run -e SECRET_NAME=my-secret-name ${DOCKER_IMAGE}:latest
+```
 
-`XPRV_KEY_NAME`: (Default: _admin_xpriv_) The name of the key storing the private key.
+### Configure the key names
+By default the key names are `admin_xpub` and `admin_xpriv`.
+You can change it by using arguments -pb and -pv or --xpub-key and --xprv-key respectively.
 
-Set these environment variables when running the Docker container to customize the secret and key names.
+ℹ️ To configure k8s connection look at the section [connect to kubernetes cluster](#connect-to-kubernetes-cluster)
+
+```bash
+docker run ${DOCKER_IMAGE}:latest --xpub-key my-xpub-key-name --xprv-key my-xpriv-key-name
+```
+
+If you prefer to use environment variables, you can set the `XPUB_KEY_NAME` and `XPRV_KEY_NAME` environment variables instead.
+
+```bash
+docker run -e XPUB_KEY_NAME=my-xpub-key-name -e XPRV_KEY_NAME=my-xpriv-key-name ${DOCKER_IMAGE}:latest
+```

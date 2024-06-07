@@ -1,33 +1,45 @@
 # syntax=docker/dockerfile:1
 
 ARG GO_VERSION=1.21
-FROM --platform=$TARGETPLATFORM golang:${GO_VERSION} AS build
-WORKDIR /src
 
+FROM --platform=$TARGETPLATFORM golang:${GO_VERSION} AS build
+ARG TARGETPLATFORM
+ARG project_name=generator
+ARG build_in_docker=false
+
+WORKDIR /src
 COPY . /src
 
-RUN --mount=type=cache,target=/go/pkg/mod/ \
-    --mount=type=bind,source=go.sum,target=go.sum \
-    --mount=type=bind,source=go.mod,target=go.mod \
-    go mod download -x
+RUN mkdir -p dist/$TARGETPLATFORM
 
 RUN --mount=type=cache,target=/go/pkg/mod/ \
-    --mount=type=bind,target=. \
-    CGO_ENABLED=0 go build -ldflags="-s -w" -v -o /generator
+    if [ "$build_in_docker" = "true" ]; then \
+        go mod download -x; \
+    fi
+
+
+RUN --mount=type=cache,target=/go/pkg/mod/ \
+    if [ "$build_in_docker" = "true" ]; then \
+        CGO_ENABLED=0 go build -ldflags="-s -w" -v -o dist/$TARGETPLATFORM/$project_name; \
+    fi
 
 FROM --platform=$TARGETPLATFORM bitnami/kubectl:latest AS final
+ARG TARGETPLATFORM
+ARG project_name=generator
+ARG build_in_docker=false
 
 WORKDIR /src
 
-ENV SECRET_NAME=spv-wallet-keys
-ENV XPUB_KEY_NAME=admin_xpub
-ENV XPRV_KEY_NAME=admin_xpriv
+COPY --from=build src/keygen.sh .
+COPY --from=build src/dist/$TARGETPLATFORM/$project_name ./generator
 
-COPY --from=build src/set_secret.sh .
-COPY --from=build /generator .
+ARG version
+ARG tag
+ENV VERSION=${version:-develop}
+ENV TAG=${tag:-main}
 
 USER root
-RUN chmod +x /src/set_secret.sh
+RUN chmod +x /src/keygen.sh
 USER 1001
 
-ENTRYPOINT [ "./set_secret.sh" ]
+ENTRYPOINT [ "./keygen.sh" ]
