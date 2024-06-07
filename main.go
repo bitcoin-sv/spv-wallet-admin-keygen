@@ -37,8 +37,6 @@ func main() {
 		panic(err)
 	}
 
-	fmt.Println("xpub_key.txt created and written successfully.")
-
 	xprvKeyFile, err := os.Create(xprvKeyName)
 
 	if err != nil {
@@ -58,5 +56,4 @@ func main() {
 		panic(err)
 	}
 
-	fmt.Println("xprv_key.txt created and written successfully.")
 }
