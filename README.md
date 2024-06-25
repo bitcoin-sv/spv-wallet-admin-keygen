@@ -4,7 +4,7 @@ This tool generates public and private key pairs for bitcoin-sv (SPV-Wallet) app
 
 ## Documentation
 
-For in-depth information and guidance, please refer to the [SPV Wallet Documentation](https://bsvblockchain.gitbook.io/docs).
+For in-depth information and guidance, please refer to the [SPV Wallet Documentation](https://docs.bsvblockchain.org/network-topology/applications/spv-wallet).
 ## Usage
 
 ### File with keys generation
